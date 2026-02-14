@@ -30,23 +30,73 @@ export default function FruitBasket() {
 
   return (
     <Box
+      className="card"
       sx={{
-        p: 3,
-        maxWidth: 400,
+        p: 4,
+        maxWidth: 450,
+        width: '100%',
         margin: 'auto',
-        bgcolor: '#f5f5f5',
-        borderRadius: 2,
-        boxShadow: 3,
+        background: 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(10px)',
+        borderRadius: 4,
+        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+        border: '1px solid rgba(255, 255, 255, 0.2)',
       }}
     >
-      <h2>Fruits in basket: {fruitsInBasket.length}</h2>
-      <Button
-        variant="contained"
-        disabled={fruitsInBasket.length >= FRUITS.length}
-        onClick={handleAddFruit}
-      >
-        Add fruit to basket
-      </Button>
+      <Box sx={{ textAlign: 'center', mb: 3 }}>
+        <h2 style={{ 
+          fontSize: '1.8rem', 
+          fontWeight: 600, 
+          color: '#333',
+          marginBottom: '0.5rem'
+        }}>
+          🧺 Fruits in basket: {fruitsInBasket.length}
+        </h2>
+        <p style={{ 
+          color: '#666', 
+          fontSize: '0.9rem',
+          marginBottom: '1.5rem'
+        }}>
+          {fruitsInBasket.length === 0 
+            ? 'Your basket is empty! Add some fruits.'
+            : `${fruitsInBasket.length} of ${FRUITS.length} fruits collected`
+          }
+        </p>
+      </Box>
+      
+      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
+        <Button
+          variant="contained"
+          disabled={fruitsInBasket.length >= FRUITS.length}
+          onClick={handleAddFruit}
+          sx={{
+            background: 'linear-gradient(135deg, #667eea, #764ba2)',
+            color: 'white',
+            padding: '12px 24px',
+            fontSize: '1rem',
+            fontWeight: 600,
+            borderRadius: '25px',
+            textTransform: 'none',
+            boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)',
+            '&:hover': {
+              background: 'linear-gradient(135deg, #5a6fd8, #6a4190)',
+              boxShadow: '0 6px 20px rgba(102, 126, 234, 0.6)',
+              transform: 'translateY(-2px)'
+            },
+            '&:disabled': {
+              background: '#ccc',
+              color: '#666',
+              boxShadow: 'none'
+            }
+          }}
+        >
+          {fruitsInBasket.length >= FRUITS.length 
+            ? '🎉 All fruits collected!' 
+            : '🍎 Add fruit to basket'
+          }
+        </Button>
+      </Box>
+      
       <List sx={{ mt: 2 }}>
         <TransitionGroup>
           {fruitsInBasket.map((item) => (
@@ -56,6 +106,17 @@ export default function FruitBasket() {
           ))}
         </TransitionGroup>
       </List>
+      
+      {fruitsInBasket.length === 0 && (
+        <Box sx={{ 
+          textAlign: 'center', 
+          py: 4, 
+          color: '#999',
+          fontStyle: 'italic'
+        }}>
+          No fruits yet. Click the button above to add some!
+        </Box>
+      )}
     </Box>
   );
 }
