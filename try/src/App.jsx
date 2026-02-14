@@ -4,9 +4,14 @@ import './App.css';
 
 function App() {
   return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
-      <h1></h1>
-      <FruitBasket />
+    <div className="app-container">
+      <header className="app-header">
+        <h1 className="app-title">🍎 Fruit Basket Manager</h1>
+        <p className="app-subtitle">Organize and manage your favorite fruits</p>
+      </header>
+      <main className="app-main">
+        <FruitBasket />
+      </main>
     </div>
   );
 }
